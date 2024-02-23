@@ -7,17 +7,10 @@ const router = express.Router();
 
 const carts = [];
 
-
 //rutas usuarios
 router.get("/", (req, res) => {
-    res.json(carts);
-  });
-
-
-
-
-
-
+  res.json(carts);
+});
 
 //exportamos el router
 module.exports = router;

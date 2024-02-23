@@ -1,6 +1,6 @@
 const express = require("express");
 //invocamos el método router de express
-const router = express.Router();
+const productsRouter = express.Router();
 //traemos las rutas
 
 //array de productos
@@ -8,16 +8,15 @@ const router = express.Router();
 const products = [];
 
 //rutas productos
-router.get("/", (req, res) => {
+productsRouter.get("/", (req, res) => {
   res.json(products);
 });
 
-router.post("/", (req, res) => {
-    const newProduct = req.body;
-    users.push(newProduct);
-    res.send({ status: "success", message: "Producto creado correctamente!" });
-  });
-
+productsRouter.post("/", (req, res) => {
+  const newProduct = req.body;
+  users.push(newProduct);
+  res.send({ status: "success", message: "Producto creado correctamente!" });
+});
 
 //exportamos el router
-module.exports = router;
+module.exports = productsRouter;
