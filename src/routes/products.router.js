@@ -23,10 +23,32 @@ productsRouter.get("/", async (req, res) => {
   }
 });
 
-productsRouter.post("/", (req, res) => {
-  const newProduct = req.body;
-  users.push(newProduct);
-  res.send({ status: "success", message: "Producto creado correctamente!" });
+//get product por id
+productsRouter.get("/:pid", async (req, res) => {
+  try {
+    let id = req.params.pid;
+    let product = await productManager.getProductById(id);
+    if (!product) {
+      return res.json({ error: "id no encontrado" });
+    }
+    return res.json(product);
+  } catch (error) {
+    res.status(500).json({
+      error: `Error interno del servidor, no se encuentra el id ${id}`,
+    });
+  }
+});
+
+//post
+productsRouter.post("/", async (req, res) => {
+  try {
+    const newProduct = req.body;
+    const response = await productManager.addProduct(newProduct);
+    res.json(response);
+    res.send({ status: "success", message: "Producto creado correctamente!" });
+  } catch (error) {
+    res.send("Error al agregar producto");
+  }
 });
 
 //exportamos el router
