@@ -1,15 +1,26 @@
 const express = require("express");
 //invocamos el método router de express
 const productsRouter = express.Router();
-//traemos las rutas
+const productManager = require("../app.js");
 
 //array de productos
 
 const products = [];
 
 //rutas productos
-productsRouter.get("/", (req, res) => {
-  res.json(products);
+//get products
+productsRouter.get("/", async (req, res) => {
+  try {
+    let limit = req.query.limit;
+    let products = await productManager.getProducts();
+    if (limit) {
+      res.json(products.slice(0, limit));
+    } else {
+      res.json(products);
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
 });
 
 productsRouter.post("/", (req, res) => {
