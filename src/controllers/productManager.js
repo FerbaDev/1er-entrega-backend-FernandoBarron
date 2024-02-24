@@ -5,7 +5,7 @@ const productManager = require("../app");
 class ProductManager {
   constructor() {
     this.products = [];
-    this.path = "/productos.json";
+    this.path = "./src/models/productos.json";
   }
 
   //Métodos:

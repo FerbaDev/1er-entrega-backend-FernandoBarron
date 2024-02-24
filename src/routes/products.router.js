@@ -1,11 +1,14 @@
 const express = require("express");
+
 //invocamos el método router de express
 const productsRouter = express.Router();
-const productManager = require("../app.js");
+//traemos el product manager
+const ProductManager = require("../controllers/productManager");
+const productManager = new ProductManager("./src/models/productos.json");
 
 //array de productos
 
-const products = [];
+const products = [];  
 
 //rutas productos
 //get products

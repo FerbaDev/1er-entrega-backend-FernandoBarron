@@ -11,6 +11,7 @@ const ProductManager = require("./controllers/productManager.js");
 //instanciamos
 const productManager = new ProductManager("./src/models/productos.json");
 //configuramos middleware para recibir datos en formato json
+app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 
 //rutas
