@@ -39,7 +39,7 @@ cartRouter.post("/:cid/product/:pid", async (req, res) => {
   let quantity = req.body.quantity || 1;
 
   try {
-    const updateCart = await cartManager.addProductToCart;
+    const updateCart = await cartManager.addProductToCart(cartId, productId, quantity);
     res.json(updateCart.products);
   } catch (error) {
     console.error("Error al agregar producto", error);
