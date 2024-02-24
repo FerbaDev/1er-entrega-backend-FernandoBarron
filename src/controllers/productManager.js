@@ -14,6 +14,7 @@ class ProductManager {
     let { title, description, price, thumbnail, code, stock } = newObject;
     //generamos id
     let id = uuidv4();
+    let products = await this.readFile();
 
     //verificaciones
 
@@ -38,11 +39,11 @@ class ProductManager {
       stock,
     };
     //pusheamos el nuevo producto
-    this.products.push(newProduct);
+    products.push(newProduct);
 
     //Guardamos el array en el archivo:
 
-    await this.saveFile(this.products);
+    await this.saveFile(products);
   }
 
   //get products
@@ -99,8 +100,9 @@ class ProductManager {
 
       if (index !== -1) {
         //Puedo usar el método de array splice para reemplazar el objeto en la posicion del index:
-        arrayProductos.splice(index, 1, productoActualizado);
+        arrayProductos[index] = {...arrayProductos[index], ...productoActualizado}
         await this.saveFile(arrayProductos);
+        console.log("Producto actualizado");
       } else {
         console.log("no se encontró el producto");
       }
